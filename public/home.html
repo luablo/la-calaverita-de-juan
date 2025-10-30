@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Calaverita de Juan - Inicio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./transitions.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        naranja: '#FF6B35',
+                        morado: '#8B4789',
+                        rosa: '#FF006E',
+                        turquesa: '#06FFA5',
+                        amarillo: '#FFD23F',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #8B4789 0%, #FF6B35 100%);
+            min-height: 100vh;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="font-sans">
+    <!-- Hero Section -->
+    <div class="min-h-screen flex items-center justify-center px-4 py-12">
+        <div class="max-w-6xl w-full">
+            <!-- Logo/Título -->
+            <div class="text-center mb-12">
+                <h1 class="text-6xl md:text-8xl font-bold text-white mb-4 drop-shadow-lg">
+                    🎃 La Calaverita de Juan 💀
+                </h1>
+                <p class="text-2xl md:text-3xl text-yellow-200 font-semibold">
+                    ¡Aprende sobre el Día de Muertos jugando!
+                </p>
+            </div>
+
+            <!-- Cards Grid -->
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <!-- Card: Jugar -->
+                <div class="bg-white rounded-2xl p-8 shadow-xl card-hover">
+                    <div class="text-center">
+                        <div class="text-7xl mb-4">🎮</div>
+                        <h2 class="text-3xl font-bold text-morado mb-4">Jugar</h2>
+                        <p class="text-gray-600 mb-6">
+                            Responde preguntas sobre cultura mexicana y leyendas tradicionales
+                        </p>
+                        <a href="index.html" class="block bg-gradient-to-r from-rosa to-naranja text-white font-bold py-4 px-8 rounded-xl hover:shadow-lg transition-all duration-300">
+                            Comenzar Aventura
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card: Crear Personaje -->
+                <div class="bg-white rounded-2xl p-8 shadow-xl card-hover">
+                    <div class="text-center">
+                        <div class="text-7xl mb-4">🎨</div>
+                        <h2 class="text-3xl font-bold text-turquesa mb-4">Personaje</h2>
+                        <p class="text-gray-600 mb-6">
+                            Crea tu avatar único en pixel art mexicano con IA
+                        </p>
+                        <a href="personaje.html" class="block bg-gradient-to-r from-turquesa to-amarillo text-gray-900 font-bold py-4 px-8 rounded-xl hover:shadow-lg transition-all duration-300">
+                            Crear Avatar
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card: Ranking -->
+                <div class="bg-white rounded-2xl p-8 shadow-xl card-hover">
+                    <div class="text-center">
+                        <div class="text-7xl mb-4">🏆</div>
+                        <h2 class="text-3xl font-bold text-morado mb-4">Ranking</h2>
+                        <p class="text-gray-600 mb-6">
+                            Mira los mejores puntajes y compite por el top 3
+                        </p>
+                        <a href="ranking.html" class="block bg-gradient-to-r from-morado to-rosa text-white font-bold py-4 px-8 rounded-xl hover:shadow-lg transition-all duration-300">
+                            Ver Ranking
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-xl">
+                <h3 class="text-3xl font-bold text-white text-center mb-8">✨ Características</h3>
+                <div class="grid md:grid-cols-4 gap-6 text-center">
+                    <div class="text-white">
+                        <div class="text-4xl mb-2">⏱️</div>
+                        <p class="font-bold text-lg">1 Minuto</p>
+                        <p class="text-sm text-yellow-200">Modo rápido</p>
+                    </div>
+                    <div class="text-white">
+                        <div class="text-4xl mb-2">📚</div>
+                        <p class="font-bold text-lg">40 Preguntas</p>
+                        <p class="text-sm text-yellow-200">Cultura mexicana</p>
+                    </div>
+                    <div class="text-white">
+                        <div class="text-4xl mb-2">👻</div>
+                        <p class="font-bold text-lg">15 Leyendas</p>
+                        <p class="text-sm text-yellow-200">Historias tradicionales</p>
+                    </div>
+                    <div class="text-white">
+                        <div class="text-4xl mb-2">💯</div>
+                        <p class="font-bold text-lg">Puntuación</p>
+                        <p class="text-sm text-yellow-200">Con penalización</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="text-center mt-12">
+                <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 inline-block">
+                    <p class="text-lg text-white mb-2">
+                        Desarrollado para <span class="font-bold text-amarillo">Code of the Dead Challenge</span>
+                    </p>
+                    <p class="text-white font-semibold">JSConf MX 2025 🇲🇽</p>
+                    <p class="text-sm mt-2 text-yellow-200">
+                        🎃 Celebrando la cultura mexicana del Día de Muertos 💀
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./transitions.js"></script>
+</body>
+</html>

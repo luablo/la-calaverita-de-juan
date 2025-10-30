@@ -290,9 +290,12 @@ body {
 }
 
 .juan-img {
-    max-width: 120px;
+    max-width: 150px;
     width: 100%;
     height: auto;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
 }
 
 .barra-progreso {
@@ -538,5 +541,83 @@ body {
 
     .puntos-numero {
         font-size: 2.8rem;
+    }
+}
+
+
+/* Selector de Nivel */
+.nivel-selector {
+    margin: 24px 0;
+}
+
+.nivel-card {
+    background: var(--gris-claro);
+    border: 3px solid var(--gris-medio);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.nivel-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px var(--sombra);
+    border-color: var(--morado);
+}
+
+.nivel-card.active {
+    background: linear-gradient(135deg, var(--morado), var(--rosa));
+    border-color: var(--rosa);
+    color: var(--blanco);
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(139, 71, 137, 0.4);
+}
+
+.nivel-emoji {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+}
+
+.nivel-nombre {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.nivel-card.active .nivel-nombre {
+    color: var(--amarillo);
+}
+
+.nivel-tiempo {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 4px;
+}
+
+.nivel-multi {
+    font-size: 0.85rem;
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+.nivel-card.active .nivel-tiempo,
+.nivel-card.active .nivel-multi {
+    color: var(--blanco);
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .nivel-card {
+        padding: 12px;
+    }
+    
+    .nivel-emoji {
+        font-size: 2rem;
+    }
+    
+    .nivel-nombre {
+        font-size: 1rem;
     }
 }

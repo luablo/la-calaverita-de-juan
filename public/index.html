@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Calaverita de Juan 🎃</title>
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./transitions.css">
 </head>
 <body>
     <div id="app">
@@ -13,19 +14,84 @@
             <div class="contenedor-inicio">
                 <h1 class="titulo-principal">🎃 La Calaverita de Juan 💀</h1>
                 <p class="subtitulo">¡Ayuda a Juan a pedir calaverita y aprende sobre el Día de Muertos!</p>
-                <div class="input-grupo">
-                    <label for="nombre-jugador">Tu nombre:</label>
-                    <input type="text" id="nombre-jugador" placeholder="Escribe tu nombre" maxlength="50">
+                
+                <!-- Mostrar si NO tiene personaje -->
+                <div id="sin-personaje">
+                    <div style="text-align: center; margin: 32px 0;">
+                        <div style="font-size: 4rem; margin-bottom: 16px;">🎨</div>
+                        <h3 style="color: var(--morado); margin-bottom: 16px; font-weight: 600;">¡Crea tu personaje primero!</h3>
+                        <p style="color: var(--negro); opacity: 0.8; margin-bottom: 24px; font-size: 1.05rem;">
+                            Sube una foto y conviértela en pixel art mexicano
+                        </p>
+                        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                            <a href="personaje.html" class="btn-principal" style="display: inline-block; text-decoration: none;">
+                                🎨 Crear mi Personaje
+                            </a>
+                            <a href="home.html" class="btn-principal" style="display: inline-block; text-decoration: none; background: linear-gradient(135deg, var(--turquesa), var(--amarillo));">
+                                🏠 Volver al Inicio
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <button id="btn-comenzar" class="btn-principal">Comenzar Aventura</button>
-                <div class="instrucciones">
-                    <h3>📜 Instrucciones:</h3>
-                    <ul>
-                        <li>Responde preguntas sobre cultura mexicana</li>
-                        <li>Cada 4 preguntas aparece una leyenda especial</li>
-                        <li>Tienes 1 minuto para ganar puntos</li>
-                        <li>¡Intenta llegar al top 3!</li>
-                    </ul>
+
+                <!-- Mostrar si tiene personaje -->
+                <div id="con-personaje">
+                    <div style="text-align: center; margin: 24px 0;">
+                        <img id="preview-personaje" src="" alt="Tu personaje" style="max-width: 150px; border-radius: 12px; box-shadow: 0 4px 12px var(--sombra); margin-bottom: 12px; image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;">
+                        <div>
+                            <a href="personaje.html" style="color: var(--morado); font-size: 0.9rem; text-decoration: none;">
+                                🎨 Cambiar personaje
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="input-grupo">
+                        <label for="nombre-jugador">Tu nombre:</label>
+                        <input type="text" id="nombre-jugador" placeholder="Escribe tu nombre" maxlength="50">
+                    </div>
+
+                    <!-- Selector de Nivel -->
+                    <div class="nivel-selector" style="margin: 24px 0;">
+                        <label style="display: block; text-align: center; color: var(--morado); font-weight: 600; margin-bottom: 16px; font-size: 1.1rem;">
+                            Selecciona tu nivel:
+                        </label>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;">
+                            <div class="nivel-card" data-nivel="ofrenda">
+                                <div class="nivel-emoji">🕯️</div>
+                                <div class="nivel-nombre">Ofrenda</div>
+                                <div class="nivel-tiempo">5 minutos</div>
+                                <div class="nivel-multi">x1 puntos</div>
+                            </div>
+                            <div class="nivel-card active" data-nivel="calaverita">
+                                <div class="nivel-emoji">💀</div>
+                                <div class="nivel-nombre">Calaverita</div>
+                                <div class="nivel-tiempo">1 minuto</div>
+                                <div class="nivel-multi">x1.5 puntos</div>
+                            </div>
+                            <div class="nivel-card" data-nivel="mictlan">
+                                <div class="nivel-emoji">🔥</div>
+                                <div class="nivel-nombre">Mictlán</div>
+                                <div class="nivel-tiempo">30 segundos</div>
+                                <div class="nivel-multi">x2 puntos</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px;">
+                    <button id="btn-comenzar" class="btn-principal">🎮 Comenzar Aventura</button>
+                    <a href="home.html" class="btn-principal" style="display: inline-block; text-decoration: none; background: linear-gradient(135deg, var(--gris-medio), var(--negro)); opacity: 0.8;">
+                        🏠 Inicio
+                    </a>
+                </div>
+                    <div class="instrucciones">
+                        <h3>📜 Instrucciones:</h3>
+                        <ul>
+                            <li>Responde preguntas sobre cultura mexicana</li>
+                            <li>Cada 4 preguntas aparece una leyenda especial</li>
+                            <li>Tienes 1 minuto para ganar puntos</li>
+                            <li>¡Intenta llegar al top 3!</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -62,7 +128,7 @@
                 </div>
 
                 <div class="juan-container">
-                    <img src="./img/juan.png" alt="Juan" class="juan-img">
+                    <img id="personaje-img" src="./img/juan.png" alt="Tu personaje" class="juan-img" style="image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;">
                 </div>
             </div>
 
@@ -109,11 +175,20 @@
                     </div>
                 </div>
 
-                <button id="btn-jugar-nuevo" class="btn-principal">Jugar de Nuevo</button>
+                <div class="flex gap-4 justify-center flex-wrap">
+                    <button id="btn-jugar-nuevo" class="btn-principal">🔄 Jugar de Nuevo</button>
+                    <a href="home.html" class="btn-principal" style="display: inline-block; text-decoration: none; background: linear-gradient(135deg, var(--turquesa), var(--amarillo));">
+                        🏠 Inicio
+                    </a>
+                    <a href="ranking.html" class="btn-principal" style="display: inline-block; text-decoration: none; background: linear-gradient(135deg, var(--morado), var(--rosa));">
+                        🏆 Ver Ranking
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
+    <script src="./transitions.js"></script>
     <script src="./script.js"></script>
 </body>
 </html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crea tu Personaje - La Calaverita de Juan</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./transitions.css">
+    <style>
+        .personaje-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 32px;
+            background: var(--blanco);
+            border-radius: 16px;
+            box-shadow: 0 2px 16px var(--sombra);
+        }
+
+        .personaje-titulo {
+            text-align: center;
+            color: var(--morado);
+            font-size: 2rem;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+
+        .upload-area {
+            border: 3px dashed var(--gris-medio);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 24px;
+        }
+
+        .upload-area:hover {
+            border-color: var(--morado);
+            background: var(--gris-claro);
+        }
+
+        .upload-area.dragover {
+            border-color: var(--rosa);
+            background: var(--gris-claro);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        .upload-text {
+            color: var(--negro);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .upload-hint {
+            color: var(--negro);
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        .preview-container {
+            display: none;
+            margin: 24px 0;
+        }
+
+        .preview-container.active {
+            display: block;
+        }
+
+        .image-preview {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .preview-box {
+            text-align: center;
+        }
+
+        .preview-box h3 {
+            color: var(--negro);
+            font-size: 1rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .preview-box img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px var(--sombra);
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid var(--gris-medio);
+            border-top: 4px solid var(--morado);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-text {
+            color: var(--negro);
+            font-size: 1.1rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            background: var(--gris-medio);
+            color: var(--negro);
+            border: none;
+            padding: 14px 32px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--gris-claro);
+            transform: translateY(-1px);
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+            display: none;
+        }
+
+        .error-message.active {
+            display: block;
+        }
+
+        .info-box {
+            background: var(--gris-claro);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 24px;
+        }
+
+        .info-box h3 {
+            color: var(--morado);
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-box li {
+            padding: 6px 0;
+            color: var(--negro);
+            opacity: 0.8;
+        }
+
+        .info-box li:before {
+            content: "✓ ";
+            color: var(--naranja);
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .image-preview {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="personaje-container">
+            <h1 class="personaje-titulo">🎨 Crea tu Personaje Pixel Art</h1>
+
+            <div class="upload-area" id="upload-area">
+                <div class="upload-icon">📸</div>
+                <div class="upload-text">Sube tu foto o arrastra aquí</div>
+                <div class="upload-hint">Formatos: JPG, PNG (máx. 5MB)</div>
+                <input type="file" id="file-input" accept="image/jpeg,image/png">
+            </div>
+
+            <div class="error-message" id="error-message"></div>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <div class="loading-text">Convirtiendo a pixel art mexicano... 🎃</div>
+            </div>
+
+            <div class="preview-container" id="preview-container">
+                <div class="image-preview">
+                    <div class="preview-box">
+                        <h3>Original</h3>
+                        <img id="original-image" src="" alt="Original">
+                    </div>
+                    <div class="preview-box">
+                        <h3>Pixel Art Mexicano</h3>
+                        <img id="pixelart-image" src="" alt="Pixel Art">
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn-principal" id="btn-usar">✅ Usar este Personaje</button>
+                    <button class="btn-secondary" id="btn-nueva">🔄 Subir Otra Foto</button>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>💡 Cómo funciona</h3>
+                <ul>
+                    <li>Sube una foto tuya o de quien quieras</li>
+                    <li>La IA la convierte a pixel art estilo mexicano</li>
+                    <li>Usa tu personaje personalizado en el juego</li>
+                    <li>¡Comparte tu creación con amigos!</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>💡 Cómo funciona</h3>
+                <ul>
+                    <li>Sube una foto tuya o de quien quieras</li>
+                    <li>La IA la convierte a pixel art estilo mexicano</li>
+                    <li>Usa tu personaje personalizado en el juego</li>
+                    <li>¡Comparte tu creación con amigos!</li>
+                </ul>
+            </div>
+
+            <!-- Navegación -->
+            <div class="text-center mt-8 flex gap-4 justify-center flex-wrap" id="btn-volver-container">
+                <a href="home.html" class="btn-secondary inline-flex items-center">
+                    <span class="mr-2">🏠</span> Inicio
+                </a>
+                <a href="ranking.html" class="btn-secondary inline-flex items-center">
+                    <span class="mr-2">🏆</span> Ranking
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mostrar botón de volver solo si ya tiene personaje
+        window.addEventListener('DOMContentLoaded', () => {
+            const tienePersonaje = localStorage.getItem('personajeCustom');
+            const container = document.getElementById('btn-volver-container');
+            if (tienePersonaje) {
+                container.innerHTML = '<a href="index.html" class="btn-secondary">← Volver al Juego</a>';
+            }
+        });
+    </script>
+    <script src="./transitions.js"></script>
+    <script src="./personaje.js"></script>
+</body>
+</html>

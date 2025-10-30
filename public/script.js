@@ -1,12 +1,39 @@
 // La Calaverita de Juan - Main Script
 
+// Niveles de dificultad
+const niveles = {
+    ofrenda: {
+        nombre: 'Ofrenda',
+        descripcion: 'Nivel tranquilo para principiantes',
+        tiempo: 300, // 5 minutos
+        multiplicador: 1,
+        emoji: '🕯️'
+    },
+    calaverita: {
+        nombre: 'Calaverita',
+        descripcion: 'Nivel normal, equilibrado',
+        tiempo: 60, // 1 minuto
+        multiplicador: 1.5,
+        emoji: '💀'
+    },
+    mictlan: {
+        nombre: 'Mictlán',
+        descripcion: 'Nivel difícil, para expertos',
+        tiempo: 30, // 30 segundos
+        multiplicador: 2,
+        emoji: '🔥'
+    }
+};
+
 // Estado del juego
 const gameState = {
     nombreJugador: '',
     puntos: 0,
     preguntaActual: 0,
     totalPreguntas: 20,
-    tiempoRestante: 60, // 1 minuto en segundos
+    tiempoRestante: 60,
+    nivelSeleccionado: 'calaverita',
+    multiplicador: 1.5,
     preguntas: [],
     leyendas: [],
     preguntasRespondidas: [],
@@ -44,10 +71,115 @@ const elementos = {
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('La Calaverita de Juan initialized');
+    console.log('🎮 La Calaverita de Juan initialized');
     cargarDatos();
     configurarEventos();
+    verificarPersonaje();
+    
+    // Debug: verificar si las cards están en el DOM
+    setTimeout(() => {
+        const cards = document.querySelectorAll('.nivel-card');
+        console.log('🔍 Cards de nivel en DOM:', cards.length);
+        if (cards.length === 0) {
+            console.warn('⚠️ No se encontraron cards de nivel, reintentando...');
+            configurarSelectorNivel();
+        }
+    }, 500);
 });
+
+// Verificar si tiene personaje creado
+function verificarPersonaje() {
+    const personajeCustom = localStorage.getItem('personajeCustom');
+    const sinPersonaje = document.getElementById('sin-personaje');
+    const conPersonaje = document.getElementById('con-personaje');
+    
+    console.log('🔍 Verificando personaje...', personajeCustom ? 'Existe' : 'No existe');
+    
+    if (!sinPersonaje || !conPersonaje) {
+        console.error('❌ No se encontraron los elementos sin-personaje o con-personaje');
+        return;
+    }
+    
+    if (personajeCustom) {
+        // Tiene personaje - mostrar formulario de juego
+        sinPersonaje.style.display = 'none';
+        conPersonaje.style.display = 'block';
+        
+        // Mostrar preview del personaje
+        const previewPersonaje = document.getElementById('preview-personaje');
+        if (previewPersonaje) {
+            previewPersonaje.src = personajeCustom;
+            console.log('✅ Preview del personaje cargado');
+        }
+        
+        // Cargar en el juego
+        cargarPersonajeCustom();
+        
+        // Configurar selector de nivel DESPUÉS de mostrar el formulario
+        setTimeout(() => {
+            configurarSelectorNivel();
+        }, 100);
+        
+        console.log('✅ Personaje personalizado detectado y cargado');
+    } else {
+        // No tiene personaje - pedir que lo cree
+        sinPersonaje.style.display = 'block';
+        conPersonaje.style.display = 'none';
+        console.log('⚠️ No hay personaje creado - mostrando pantalla de creación');
+    }
+}
+
+// Configurar selector de nivel
+function configurarSelectorNivel() {
+    const nivelCards = document.querySelectorAll('.nivel-card');
+    console.log('🎮 Configurando selector de nivel, cards encontradas:', nivelCards.length);
+    
+    if (nivelCards.length === 0) {
+        console.error('❌ No se encontraron cards de nivel');
+        return;
+    }
+    
+    nivelCards.forEach((card, index) => {
+        console.log(`Card ${index}:`, card.dataset.nivel);
+        
+        // Remover listeners anteriores clonando el elemento
+        const newCard = card.cloneNode(true);
+        card.parentNode.replaceChild(newCard, card);
+        
+        newCard.addEventListener('click', function() {
+            console.log('👆 Click en nivel:', this.dataset.nivel);
+            
+            // Remover active de todas
+            document.querySelectorAll('.nivel-card').forEach(c => c.classList.remove('active'));
+            
+            // Agregar active a la seleccionada
+            this.classList.add('active');
+            
+            // Guardar nivel seleccionado
+            gameState.nivelSeleccionado = this.dataset.nivel;
+            
+            const nivel = niveles[this.dataset.nivel];
+            console.log('✅ Nivel seleccionado:', nivel.nombre, `(${nivel.tiempo}s, x${nivel.multiplicador})`);
+        });
+    });
+}
+
+// Cargar personaje personalizado en el juego
+function cargarPersonajeCustom() {
+    const personajeCustom = localStorage.getItem('personajeCustom');
+    if (personajeCustom) {
+        const personajeImg = document.getElementById('personaje-img');
+        if (personajeImg) {
+            personajeImg.src = personajeCustom;
+            personajeImg.style.imageRendering = 'pixelated';
+            console.log('✅ Personaje cargado en el juego');
+        } else {
+            console.error('❌ No se encontró el elemento personaje-img');
+        }
+    } else {
+        console.log('⚠️ No hay personaje personalizado en localStorage');
+    }
+}
 
 // Cargar datos JSON
 async function cargarDatos() {
@@ -98,10 +230,17 @@ function iniciarJuego() {
         return;
     }
 
+    const nivel = niveles[gameState.nivelSeleccionado];
+    
+    console.log('🎮 Iniciando juego con nivel:', gameState.nivelSeleccionado);
+    console.log('⏱️ Tiempo configurado:', nivel.tiempo, 'segundos');
+    console.log('💯 Multiplicador:', nivel.multiplicador);
+    
     gameState.nombreJugador = nombre;
     gameState.puntos = 0;
     gameState.preguntaActual = 0;
-    gameState.tiempoRestante = 60;
+    gameState.tiempoRestante = nivel.tiempo;
+    gameState.multiplicador = nivel.multiplicador;
     gameState.preguntasRespondidas = [];
     gameState.casaActual = 1;
 
@@ -110,12 +249,21 @@ function iniciarJuego() {
     elementos.totalPreguntasDisplay.textContent = gameState.totalPreguntas;
 
     cambiarPantalla('juego');
+    
+    // Asegurar que el personaje se cargue al iniciar
+    cargarPersonajeCustom();
+    
+    // Actualizar tiempo en pantalla antes de iniciar
+    actualizarTiempo();
+    
     iniciarTemporizador();
     cargarPregunta();
 }
 
 // Cambiar pantalla
 function cambiarPantalla(pantalla) {
+    console.log('🔄 Cambiando a pantalla:', pantalla);
+    
     document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('active'));
 
     switch (pantalla) {
@@ -132,6 +280,8 @@ function cambiarPantalla(pantalla) {
             elementos.pantallaFinal.classList.add('active');
             break;
     }
+    
+    console.log('✅ Pantalla cambiada a:', pantalla);
 }
 
 // Temporizador
@@ -154,7 +304,9 @@ function iniciarTemporizador() {
 function actualizarTiempo() {
     const minutos = Math.floor(gameState.tiempoRestante / 60);
     const segundos = gameState.tiempoRestante % 60;
-    elementos.tiempoDisplay.textContent = `${minutos}:${segundos.toString().padStart(2, '0')}`;
+    const tiempoFormateado = `${minutos}:${segundos.toString().padStart(2, '0')}`;
+    elementos.tiempoDisplay.textContent = tiempoFormateado;
+    console.log('⏱️ Tiempo actualizado:', tiempoFormateado, `(${gameState.tiempoRestante}s restantes)`);
 }
 
 // Cargar pregunta
@@ -220,7 +372,9 @@ function verificarRespuesta(seleccionada, correcta, boton) {
 
     if (seleccionada === correcta) {
         boton.classList.add('correcta');
-        gameState.puntos += gameState.preguntaActualData.puntos;
+        // Aplicar multiplicador del nivel
+        const puntosGanados = Math.round(gameState.preguntaActualData.puntos * gameState.multiplicador);
+        gameState.puntos += puntosGanados;
         elementos.puntosDisplay.textContent = gameState.puntos;
     } else {
         boton.classList.add('incorrecta');
@@ -267,7 +421,9 @@ function verificarRespuestaLeyenda(seleccionada, correcta, boton) {
 
     if (seleccionada === correcta) {
         boton.classList.add('correcta');
-        gameState.puntos += gameState.leyendaActual.puntos;
+        // Aplicar multiplicador del nivel a leyendas
+        const puntosGanados = Math.round(gameState.leyendaActual.puntos * gameState.multiplicador);
+        gameState.puntos += puntosGanados;
         elementos.puntosDisplay.textContent = gameState.puntos;
     } else {
         boton.classList.add('incorrecta');
@@ -287,23 +443,59 @@ function verificarRespuestaLeyenda(seleccionada, correcta, boton) {
 
 // Finalizar juego
 async function finalizarJuego() {
+    // Detener temporizador
     if (gameState.timerInterval) {
         clearInterval(gameState.timerInterval);
+        gameState.timerInterval = null;
     }
 
-    elementos.nombreFinal.textContent = gameState.nombreJugador;
-    elementos.puntosFinal.textContent = gameState.puntos;
+    console.log('🏁 Finalizando juego...');
 
+    const nivel = niveles[gameState.nivelSeleccionado];
+    
     // Guardar en localStorage
     guardarEnLocalStorage();
 
     // Enviar a servidor
     await enviarPuntajeServidor();
 
-    // Cargar ranking
-    await cargarRanking();
-
-    cambiarPantalla('final');
+    console.log('✅ Juego finalizado - Redirigiendo a ranking...');
+    
+    // Mostrar mensaje de transición
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #8B4789 0%, #FF6B35 100%);
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-family: inherit;
+    `;
+    
+    overlay.innerHTML = `
+        <div style="text-align: center;">
+            <div style="font-size: 5rem; margin-bottom: 20px;">🎉</div>
+            <h2 style="font-size: 2.5rem; margin-bottom: 10px;">¡Juego Terminado!</h2>
+            <p style="font-size: 1.5rem; margin-bottom: 10px;">${gameState.nombreJugador}</p>
+            <p style="font-size: 3rem; font-weight: bold; color: #FFD23F; margin-bottom: 10px;">${gameState.puntos} puntos</p>
+            <p style="font-size: 1.2rem; opacity: 0.9;">${nivel.emoji} Nivel: ${nivel.nombre} (x${nivel.multiplicador})</p>
+            <p style="font-size: 1rem; margin-top: 30px; opacity: 0.8;">Redirigiendo al ranking...</p>
+        </div>
+    `;
+    
+    document.body.appendChild(overlay);
+    
+    // Redirigir después de 3 segundos
+    setTimeout(() => {
+        window.location.href = 'ranking.html';
+    }, 3000);
 }
 
 // Guardar en localStorage
@@ -320,6 +512,9 @@ function guardarEnLocalStorage() {
 // Enviar puntaje al servidor
 async function enviarPuntajeServidor() {
     try {
+        // Obtener avatar del jugador
+        const avatar = localStorage.getItem('personajeCustom') || '';
+        
         const response = await fetch('../backend/save_score.php', {
             method: 'POST',
             headers: {
@@ -327,7 +522,8 @@ async function enviarPuntajeServidor() {
             },
             body: JSON.stringify({
                 nombre: gameState.nombreJugador,
-                puntos: gameState.puntos
+                puntos: gameState.puntos,
+                avatar: avatar
             })
         });
 

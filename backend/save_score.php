@@ -38,12 +38,16 @@ if ($puntos < 0) {
     exit();
 }
 
+// Obtener avatar (opcional)
+$avatar = isset($data['avatar']) ? $data['avatar'] : null;
+
 try {
     // Insertar puntaje en la base de datos
-    $stmt = $pdo->prepare("INSERT INTO puntajes (nombre, puntos) VALUES (:nombre, :puntos)");
+    $stmt = $pdo->prepare("INSERT INTO puntajes (nombre, puntos, avatar) VALUES (:nombre, :puntos, :avatar)");
     $stmt->execute([
         ':nombre' => $nombre,
-        ':puntos' => $puntos
+        ':puntos' => $puntos,
+        ':avatar' => $avatar
     ]);
     
     $id = $pdo->lastInsertId();
@@ -53,7 +57,8 @@ try {
         'message' => 'Puntaje guardado exitosamente',
         'id' => $id,
         'nombre' => $nombre,
-        'puntos' => $puntos
+        'puntos' => $puntos,
+        'avatar' => $avatar ? 'guardado' : 'sin avatar'
     ]);
     
 } catch (PDOException $e) {

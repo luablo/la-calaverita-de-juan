@@ -2,12 +2,12 @@
 require_once 'db_config.php';
 
 try {
-    // Obtener los mejores puntajes (top 10)
+    // Obtener los mejores puntajes (top 50 para mostrar más en ranking)
     $stmt = $pdo->prepare("
-        SELECT nombre, puntos, fecha 
+        SELECT nombre, puntos, avatar, fecha 
         FROM puntajes 
         ORDER BY puntos DESC, fecha DESC 
-        LIMIT 10
+        LIMIT 50
     ");
     $stmt->execute();
     
