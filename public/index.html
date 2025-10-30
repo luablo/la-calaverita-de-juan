@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Calaverita de Juan 🎃</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Pantalla de Inicio -->
+        <div id="pantalla-inicio" class="pantalla active">
+            <div class="contenedor-inicio">
+                <h1 class="titulo-principal">🎃 La Calaverita de Juan 💀</h1>
+                <p class="subtitulo">¡Ayuda a Juan a pedir calaverita y aprende sobre el Día de Muertos!</p>
+                <div class="input-grupo">
+                    <label for="nombre-jugador">Tu nombre:</label>
+                    <input type="text" id="nombre-jugador" placeholder="Escribe tu nombre" maxlength="50">
+                </div>
+                <button id="btn-comenzar" class="btn-principal">Comenzar Aventura</button>
+                <div class="instrucciones">
+                    <h3>📜 Instrucciones:</h3>
+                    <ul>
+                        <li>Responde preguntas sobre cultura mexicana</li>
+                        <li>Cada 4 preguntas aparece una leyenda especial</li>
+                        <li>Tienes 1 minuto para ganar puntos</li>
+                        <li>¡Intenta llegar al top 3!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pantalla de Juego -->
+        <div id="pantalla-juego" class="pantalla">
+            <div class="header-juego">
+                <div class="info-jugador">
+                    <span id="nombre-display">👤 Jugador</span>
+                </div>
+                <div class="marcador">
+                    <span class="icono-calaverita">💀</span>
+                    <span id="puntos-display">0</span> puntos
+                </div>
+                <div class="temporizador">
+                    <span class="icono-reloj">⏱️</span>
+                    <span id="tiempo-display">5:00</span>
+                </div>
+            </div>
+
+            <div class="contenedor-juego">
+                <div class="casa-container">
+                    <img id="casa-actual" src="./img/casa1.png" alt="Casa" class="casa-img">
+                </div>
+
+                <div class="pregunta-container">
+                    <div class="contador-preguntas">
+                        Pregunta <span id="pregunta-numero">1</span> de <span id="total-preguntas">20</span>
+                    </div>
+                    <h2 id="texto-pregunta" class="pregunta-texto">Cargando pregunta...</h2>
+                    <div id="opciones-container" class="opciones-grid">
+                        <!-- Opciones generadas dinámicamente -->
+                    </div>
+                </div>
+
+                <div class="juan-container">
+                    <img src="./img/juan.png" alt="Juan" class="juan-img">
+                </div>
+            </div>
+
+            <div class="barra-progreso">
+                <div id="progreso-bar" class="progreso-fill"></div>
+            </div>
+        </div>
+
+        <!-- Pantalla de Leyenda -->
+        <div id="pantalla-leyenda" class="pantalla">
+            <div class="leyenda-container">
+                <h2 class="leyenda-titulo">📖 Leyenda Mexicana</h2>
+                <div class="leyenda-contenido">
+                    <img id="leyenda-img" src="" alt="Leyenda" class="leyenda-imagen">
+                    <h3 id="leyenda-nombre" class="leyenda-nombre"></h3>
+                    <p id="leyenda-descripcion" class="leyenda-descripcion"></p>
+                </div>
+                <div class="pregunta-leyenda">
+                    <h3 id="leyenda-pregunta" class="pregunta-texto"></h3>
+                    <div id="leyenda-opciones" class="opciones-grid">
+                        <!-- Opciones de leyenda -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pantalla Final -->
+        <div id="pantalla-final" class="pantalla">
+            <div class="contenedor-final">
+                <h1 class="titulo-final">🎉 ¡Juego Terminado! 🎉</h1>
+                <div class="resultado-final">
+                    <div class="calaverita-animada">💀🍬💀</div>
+                    <h2 id="nombre-final">Jugador</h2>
+                    <div class="puntos-final">
+                        <span class="puntos-numero" id="puntos-final">0</span>
+                        <span class="puntos-label">puntos</span>
+                    </div>
+                </div>
+
+                <div class="ranking-container">
+                    <h3>🏆 Top 3 Mejores Puntajes 🏆</h3>
+                    <div id="ranking-lista" class="ranking-lista">
+                        <p>Cargando ranking...</p>
+                    </div>
+                </div>
+
+                <button id="btn-jugar-nuevo" class="btn-principal">Jugar de Nuevo</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

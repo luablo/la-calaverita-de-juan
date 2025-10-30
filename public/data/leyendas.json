@@ -1,0 +1,54 @@
+{
+  "leyendas": [
+    {
+      "id": 1,
+      "nombre": "La Llorona",
+      "imagen": "llorona.png",
+      "descripcion": "Cuenta la leyenda que una mujer ahogó a sus hijos en un río y ahora vaga por las noches llorando y buscándolos. Su grito '¡Ay mis hijos!' aterroriza a quienes la escuchan. Se dice que aparece cerca de ríos y canales.",
+      "pregunta": "¿Qué grita La Llorona según la leyenda?",
+      "opciones": ["¡Ay mis hijos!", "¡Socorro!", "¡Ayuda!", "¡Venganza!"],
+      "respuesta": 0,
+      "puntos": 20
+    },
+    {
+      "id": 2,
+      "nombre": "El Charro Negro",
+      "imagen": "charro_negro.png",
+      "descripcion": "Es un jinete vestido completamente de negro que aparece en los caminos solitarios. Se dice que hace tratos con las personas a cambio de su alma. Monta un caballo negro y desaparece en las sombras.",
+      "pregunta": "¿Qué pide el Charro Negro a cambio de sus favores?",
+      "opciones": ["Dinero", "El alma", "Comida", "Silencio"],
+      "respuesta": 1,
+      "puntos": 20
+    },
+    {
+      "id": 3,
+      "nombre": "El Nahual",
+      "imagen": "nahual.png",
+      "descripcion": "Los nahuales son personas que tienen la capacidad de transformarse en animales, especialmente de noche. Esta habilidad era considerada un don en las culturas prehispánicas. Se dice que protegen a su comunidad o causan travesuras.",
+      "pregunta": "¿En qué se transforma un nahual?",
+      "opciones": ["En fantasma", "En animal", "En niebla", "En árbol"],
+      "respuesta": 1,
+      "puntos": 20
+    },
+    {
+      "id": 4,
+      "nombre": "La Planchada",
+      "imagen": "llorona.png",
+      "descripcion": "Es el fantasma de una enfermera que murió de amor y ahora cuida a los enfermos en los hospitales. Siempre aparece con su uniforme impecablemente planchado y blanco. Los pacientes dicen sentirse mejor después de su visita.",
+      "pregunta": "¿Dónde aparece La Planchada?",
+      "opciones": ["En escuelas", "En hospitales", "En iglesias", "En cementerios"],
+      "respuesta": 1,
+      "puntos": 20
+    },
+    {
+      "id": 5,
+      "nombre": "El Chupacabras",
+      "imagen": "nahual.png",
+      "descripcion": "Criatura misteriosa que supuestamente ataca animales de granja, especialmente cabras, y les succiona la sangre. Aunque es una leyenda moderna, se ha vuelto muy popular en México y Latinoamérica.",
+      "pregunta": "¿Qué hace el Chupacabras según la leyenda?",
+      "opciones": ["Roba comida", "Succiona sangre de animales", "Asusta niños", "Canta por las noches"],
+      "respuesta": 1,
+      "puntos": 20
+    }
+  ]
+}

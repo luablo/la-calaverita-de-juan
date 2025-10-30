@@ -1,0 +1,179 @@
+{
+  "preguntas": [
+    {
+      "id": 1,
+      "pregunta": "¿Qué se celebra el 2 de noviembre en México?",
+      "opciones": ["Día de Muertos", "Halloween", "Navidad", "Año Nuevo"],
+      "respuesta": 0,
+      "puntos": 10
+    },
+    {
+      "id": 2,
+      "pregunta": "¿Qué flor es tradicional en las ofrendas del Día de Muertos?",
+      "opciones": ["Rosa", "Cempasúchil", "Tulipán", "Girasol"],
+      "respuesta": 1,
+      "puntos": 10
+    },
+    {
+      "id": 3,
+      "pregunta": "¿Cómo se llama el pan tradicional del Día de Muertos?",
+      "opciones": ["Pan dulce", "Pan de muerto", "Concha", "Bolillo"],
+      "respuesta": 1,
+      "puntos": 10
+    },
+    {
+      "id": 4,
+      "pregunta": "¿Qué se coloca en las ofrendas para que los difuntos encuentren el camino?",
+      "opciones": ["Velas", "Flores", "Sal", "Todas las anteriores"],
+      "respuesta": 3,
+      "puntos": 10
+    },
+    {
+      "id": 5,
+      "pregunta": "¿Cuántos niveles tiene una ofrenda tradicional?",
+      "opciones": ["2", "3", "5", "7"],
+      "respuesta": 3,
+      "puntos": 15
+    },
+    {
+      "id": 6,
+      "pregunta": "¿Qué representa el color naranja en el Día de Muertos?",
+      "opciones": ["La muerte", "El sol y la vida", "La tristeza", "La alegría"],
+      "respuesta": 1,
+      "puntos": 10
+    },
+    {
+      "id": 7,
+      "pregunta": "¿Qué es una calaverita literaria?",
+      "opciones": ["Un dulce", "Un poema satírico", "Una canción", "Un baile"],
+      "respuesta": 1,
+      "puntos": 15
+    },
+    {
+      "id": 8,
+      "pregunta": "¿Qué se pone en la ofrenda para que los difuntos se laven las manos?",
+      "opciones": ["Jabón", "Agua", "Toalla", "Todas las anteriores"],
+      "respuesta": 3,
+      "puntos": 10
+    },
+    {
+      "id": 9,
+      "pregunta": "¿Cuál es el nombre de las calaveras de azúcar?",
+      "opciones": ["Dulces de muerte", "Alfeñiques", "Caramelos", "Bombones"],
+      "respuesta": 1,
+      "puntos": 15
+    },
+    {
+      "id": 10,
+      "pregunta": "¿Qué cultura prehispánica celebraba a los muertos?",
+      "opciones": ["Azteca", "Maya", "Olmeca", "Todas las anteriores"],
+      "respuesta": 3,
+      "puntos": 15
+    },
+    {
+      "id": 11,
+      "pregunta": "¿Qué bebida tradicional se ofrece en las ofrendas?",
+      "opciones": ["Café", "Atole", "Refresco", "Jugo"],
+      "respuesta": 1,
+      "puntos": 10
+    },
+    {
+      "id": 12,
+      "pregunta": "¿Qué significa 'Mictlán' en la cultura azteca?",
+      "opciones": ["Cielo", "Inframundo", "Tierra", "Mar"],
+      "respuesta": 1,
+      "puntos": 15
+    },
+    {
+      "id": 13,
+      "pregunta": "¿Qué se coloca en la ofrenda para representar el viento?",
+      "opciones": ["Papel picado", "Velas", "Flores", "Incienso"],
+      "respuesta": 0,
+      "puntos": 10
+    },
+    {
+      "id": 14,
+      "pregunta": "¿Cuál es el nombre del dios azteca de la muerte?",
+      "opciones": ["Quetzalcóatl", "Mictlantecuhtli", "Tláloc", "Huitzilopochtli"],
+      "respuesta": 1,
+      "puntos": 15
+    },
+    {
+      "id": 15,
+      "pregunta": "¿Qué se pide cuando los niños dicen 'calaverita'?",
+      "opciones": ["Dinero", "Dulces", "Juguetes", "Comida"],
+      "respuesta": 1,
+      "puntos": 10
+    },
+    {
+      "id": 16,
+      "pregunta": "¿En qué mes se celebra el Día de Muertos?",
+      "opciones": ["Octubre", "Noviembre", "Diciembre", "Septiembre"],
+      "respuesta": 1,
+      "puntos": 5
+    },
+    {
+      "id": 17,
+      "pregunta": "¿Qué representa el copal en las ofrendas?",
+      "opciones": ["Fuego", "Agua", "Aire purificador", "Tierra"],
+      "respuesta": 2,
+      "puntos": 10
+    },
+    {
+      "id": 18,
+      "pregunta": "¿Qué comida tradicional NO se pone en las ofrendas?",
+      "opciones": ["Mole", "Tamales", "Pizza", "Chocolate"],
+      "respuesta": 2,
+      "puntos": 10
+    },
+    {
+      "id": 19,
+      "pregunta": "¿Cuándo regresan las almas de los niños según la tradición?",
+      "opciones": ["1 de noviembre", "2 de noviembre", "31 de octubre", "3 de noviembre"],
+      "respuesta": 0,
+      "puntos": 10
+    },
+    {
+      "id": 20,
+      "pregunta": "¿Qué artista mexicano es famoso por sus calaveras?",
+      "opciones": ["Frida Kahlo", "Diego Rivera", "José Guadalupe Posada", "Rufino Tamayo"],
+      "respuesta": 2,
+      "puntos": 15
+    },
+    {
+      "id": 21,
+      "pregunta": "¿Qué representa la sal en la ofrenda?",
+      "opciones": ["Sabor", "Purificación", "Conservación", "Todas las anteriores"],
+      "respuesta": 3,
+      "puntos": 10
+    },
+    {
+      "id": 22,
+      "pregunta": "¿Cómo se llama la Catrina antes de ser famosa?",
+      "opciones": ["La Calavera Garbancera", "La Muerte Elegante", "La Dama de Huesos", "La Señora Muerte"],
+      "respuesta": 0,
+      "puntos": 15
+    },
+    {
+      "id": 23,
+      "pregunta": "¿Qué fruta se coloca típicamente en las ofrendas?",
+      "opciones": ["Manzana", "Naranja", "Plátano", "Uva"],
+      "respuesta": 1,
+      "puntos": 10
+    },
+    {
+      "id": 24,
+      "pregunta": "¿Cuál es el propósito principal del Día de Muertos?",
+      "opciones": ["Asustar", "Recordar y honrar a los difuntos", "Pedir dulces", "Disfrazarse"],
+      "respuesta": 1,
+      "puntos": 10
+    },
+    {
+      "id": 25,
+      "pregunta": "¿Qué elemento NO es parte de una ofrenda tradicional?",
+      "opciones": ["Fotografía del difunto", "Velas", "Globos", "Comida favorita"],
+      "respuesta": 2,
+      "puntos": 10
+    }
+  ]
+}
